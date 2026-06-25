@@ -1,0 +1,195 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  background: #eef2f5;
+}
+
+/* FORMULARIO */
+
+.auth-left,
+.auth-right {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card {
+  width: 520px;
+
+  background: white;
+
+  border-radius: 25px;
+
+  padding: 50px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card h1 {
+  text-align: center;
+  font-size: 35px;
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.auth-form input {
+  width: 100%;
+
+  padding: 18px;
+
+  border: 1px solid #d1d5db;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #22c55e;
+}
+
+/* BOTON LOGIN */
+
+.login-button {
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: #22c55e;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.login-button:hover {
+  background: #16a34a;
+}
+
+/* BOTON REGISTER */
+
+.register-button {
+  border: none;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: #ec4899;
+
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background: #db2777;
+}
+
+.auth-forgot {
+  text-align: center;
+  margin-top: 20px;
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+.auth-link {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.auth-link a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* IMAGENES */
+
+.login-image,
+.register-image {
+  width: 40%;
+  height: 100vh;
+
+  background-size: cover;
+  background-position: center;
+}
+
+.login-image {
+  background-image: url(
+    "https://images.unsplash.com/photo-1547592180-85f173990554"
+  );
+}
+
+.register-image {
+  background-image: url(
+    "https://images.unsplash.com/photo-1512621776951-a57141f2eefd"
+  );
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .login-image,
+  .register-image {
+    display: none;
+  }
+
+  .auth-left,
+  .auth-right {
+    width: 100%;
+  }
+
+  .auth-card {
+    width: 90%;
+  }
+}
+
+.forgot-button {
+  margin-top: 15px;
+
+  border: none;
+  background: none;
+
+  color: #64748b;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  
+}
+
+.forgot-button:hover {
+  text-decoration: underline;
+}
