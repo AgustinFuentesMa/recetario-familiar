@@ -131,7 +131,7 @@ const forgotPassword = async (req, res) => {
     );
 
     const resetLink =
-      `http://localhost:5173/reset-password/${token}`;
+      `https://recetario-familiar-five.vercel.app/reset-password/${token}`;
 
     const info = await transporter.sendMail({
   from: process.env.EMAIL_USER,
