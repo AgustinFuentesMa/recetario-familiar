@@ -25,6 +25,45 @@ function ForgotPassword() {
     }
   };
 
+  const forgotPassword = async (req, res) => {
+  try {
+
+    console.log("1");
+
+    const { email } = req.body;
+
+    console.log("2", email);
+
+    const user = await pool.query(
+      "SELECT * FROM usuarios WHERE email = $1",
+      [email]
+    );
+
+    console.log("3", user.rows.length);
+
+    const token = crypto.randomBytes(32).toString("hex");
+
+    console.log("4");
+
+    console.log("ANTES DEL SENDMAIL");
+
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Recuperación",
+      html: "<h1>Hola</h1>",
+    });
+
+    console.log("DESPUÉS DEL SENDMAIL");
+
+    res.json({ ok: true });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+};
+
   return (
     <div className="auth-page">
 
