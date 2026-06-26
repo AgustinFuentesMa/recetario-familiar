@@ -97,28 +97,34 @@ const register = async (req, res) => {
 
 const forgotPassword = async (req, res) => {
   try {
+    console.log("========== INICIO ==========");
 
     const { email } = req.body;
+    console.log("EMAIL:", email);
 
     const user = await pool.query(
       "SELECT * FROM usuarios WHERE email = $1",
       [email]
     );
 
+    console.log("USUARIO ENCONTRADO:", user.rows.length);
+
     if (user.rows.length === 0) {
+      console.log("NO EXISTE EL USUARIO");
       return res.json({
-        message:
-          "Si el email existe se enviará un enlace"
+        message: "Si el email existe se enviará un enlace",
       });
     }
 
-    const token = crypto
-      .randomBytes(32)
-      .toString("hex");
+    console.log("GENERANDO TOKEN");
+
+    const token = crypto.randomBytes(32).toString("hex");
 
     const expireDate = new Date(
       Date.now() + 1000 * 60 * 60
     );
+
+    console.log("ACTUALIZANDO BD");
 
     await pool.query(
       `
@@ -130,42 +136,42 @@ const forgotPassword = async (req, res) => {
       [token, expireDate, email]
     );
 
-    const resetLink =
-      `https://recetario-familiar-five.vercel.app/reset-password/${token}`;
+    console.log("BD ACTUALIZADA");
+
+    const resetLink = `https://recetario-familiar-five.vercel.app/reset-password/${token}`;
+
+    console.log("LINK:", resetLink);
+
+    console.log("ANTES DE SENDMAIL");
 
     const info = await transporter.sendMail({
-  from: process.env.EMAIL_USER,
-  to: email,
-  subject: "Recuperación de contraseña",
-  html: `
-    <h2>Recetario Familiar</h2>
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Recuperación de contraseña",
+      html: `
+        <h2>Recetario Familiar</h2>
+        <a href="${resetLink}">
+          Restablecer contraseña
+        </a>
+      `,
+    });
 
-    <p>
-      Haz click en el siguiente enlace:
-    </p>
-
-    <a href="${resetLink}">
-      Restablecer contraseña
-    </a>
-
-    <p>
-      El enlace vence en 1 hora.
-    </p>
-  `,
-});
-
-console.log("MAIL ENVIADO");
-
+    console.log("DESPUÉS DE SENDMAIL");
+    console.log(info);
 
     res.json({
-      message:
-        "Correo enviado correctamente",
+      message: "Correo enviado correctamente",
     });
 
   } catch (error) {
+    console.log("ERROR COMPLETO:");
     console.log(error);
 
-    res.status(500).json(error);
+    res.status(500).json({
+      message: error.message,
+      code: error.code,
+      stack: error.stack,
+    });
   }
 };
 
