@@ -351,7 +351,7 @@ backgroundColor:selectedRecipe.color
 >
 
 <h2>
-🍽 {selectedRecipe.nombre}
+🍽 {selectedRecipe.nombre.toUpperCase()}
 </h2>
 
 <div className="recipe-icons">
@@ -359,6 +359,16 @@ backgroundColor:selectedRecipe.color
 <button
 className="icon-button"
 title="Compartir"
+onClick={() => {
+
+const link =
+`${window.location.origin}/shared/${selectedRecipe.id}`;
+
+navigator.clipboard.writeText(link);
+
+alert("✅ Enlace copiado");
+
+}}
 >
 📤
 </button>

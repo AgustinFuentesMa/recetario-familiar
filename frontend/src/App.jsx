@@ -5,6 +5,7 @@
   import Home from "./pages/Home";
   import ForgotPassword from "./pages/ForgotPassword";
   import ResetPassword from "./pages/ResetPassword";
+  import SharedRecipe from "./pages/SharedRecipe";
 
   function App() {
     return (
@@ -15,6 +16,7 @@
           <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>}/>
           <Route path="/forgot-password" element={<ForgotPassword />}/>
           <Route path="/reset-password/:token" element={<ResetPassword />}/>
+          <Route path="/shared/:id" element={<SharedRecipe/>}/>
         </Routes>
       </BrowserRouter>
     );
