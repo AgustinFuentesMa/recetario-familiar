@@ -221,6 +221,38 @@
   border-color: #4caf50;
 }
 
+.recipe-view{
+
+  max-width:700px;
+
+  max-height:85vh;
+
+  overflow-y:auto;
+
+  text-align:left;
+}
+
+.recipe-view h2{
+
+  text-align:center;
+
+  margin-bottom:20px;
+}
+
+.recipe-view h3{
+
+  margin-top:20px;
+
+  color:#4caf50;
+}
+
+.recipe-view p{
+
+  white-space:pre-wrap;
+
+  line-height:1.6;
+}
+
 /* ================================= */
 /* TABLETS */
 /* ================================= */

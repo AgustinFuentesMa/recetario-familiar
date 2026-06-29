@@ -14,10 +14,9 @@ function Home() {
   const [recipes, setRecipes] = useState([]);
   const [usuario, setUsuario] = useState(null);
   const [search, setSearch] = useState("");
-
   const [showModal, setShowModal] = useState(false);
   const [editingRecipe, setEditingRecipe] = useState(null);
-
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [nombre, setNombre] = useState("");
   const [ingredientes, setIngredientes] = useState("");
   const [descripcion, setDescripcion] = useState("");
@@ -167,6 +166,10 @@ function Home() {
         )
   );
 
+  const handleViewRecipe = (recipe) => {
+  setSelectedRecipe(recipe);
+  };
+
   return (
     <div className="home">
 
@@ -233,6 +236,9 @@ function Home() {
                 }
                 onEdit={
                   handleEditRecipe
+                }
+                onView={
+                  handleViewRecipe
                 }
               />
             )
@@ -329,8 +335,49 @@ function Home() {
           </div>
 
         </div>
+        
       )}
+{selectedRecipe && (
 
+  <div className="modal-overlay">
+
+    <div className="modal recipe-view">
+
+      <h2>
+        {selectedRecipe.nombre}
+      </h2>
+
+      <h3>🥕 Ingredientes</h3>
+
+      <p>
+        {selectedRecipe.ingredientes}
+      </p>
+
+      <h3>👨‍🍳 Preparación</h3>
+
+      <p>
+        {selectedRecipe.descripcion}
+      </p>
+
+      <h3>💡 Tips</h3>
+
+      <p>
+        {selectedRecipe.tips}
+      </p>
+
+      <button
+        onClick={() =>
+          setSelectedRecipe(null)
+        }
+      >
+        Cerrar
+      </button>
+
+    </div>
+
+  </div>
+
+)}
     </div>
   );
 }
