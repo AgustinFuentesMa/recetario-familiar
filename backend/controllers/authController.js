@@ -137,7 +137,7 @@ const forgotPassword = async (req, res) => {
     console.log("ENVIANDO MAIL CON RESEND");
 
     const data = await resend.emails.send({
-      from: "Recetario Familiar <familiarrecetario@gmail.com>",
+      from: "Recetario Familiar <onboarding@resend.dev>",
       to: email,
       subject: "Recuperación de contraseña",
       html: `
