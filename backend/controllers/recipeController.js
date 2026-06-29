@@ -198,10 +198,55 @@ const deleteRecipe = async (req, res) => {
   }
 };
 
+const getSharedRecipe = async (req, res) => {
+  try {
+
+    const { id } = req.params;
+
+    const receta = await pool.query(
+      `
+      SELECT
+        recetas.id,
+        recetas.nombre AS receta_nombre,
+        recetas.ingredientes,
+        recetas.descripcion,
+        recetas.tips,
+        recetas.color,
+        recetas.letra,
+        recetas.usuario_id,
+
+        usuarios.nombre AS autor_nombre,
+        usuarios.apellido AS autor_apellido
+
+      FROM recetas
+
+      INNER JOIN usuarios
+      ON recetas.usuario_id = usuarios.id
+
+      WHERE recetas.id = $1
+      `,
+      [id]
+    );
+
+    if (receta.rows.length === 0) {
+      return res.status(404).json({
+        message: "Receta no encontrada"
+      });
+    }
+
+    res.json(receta.rows[0]);
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error);
+  }
+};
+
 module.exports = {
   createRecipe,
   getRecipes,
   getRecipesByLetter,
   updateRecipe,
-  deleteRecipe
+  deleteRecipe,
+  getSharedRecipe
 };

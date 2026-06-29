@@ -403,15 +403,6 @@ title="Favorito"
 <div className="recipe-footer">
 
 <button
-onClick={()=>{
-setSelectedRecipe(null);
-handleEditRecipe(selectedRecipe);
-}}
->
-✏️ Editar
-</button>
-
-<button
 onClick={()=>
 setSelectedRecipe(null)
 }

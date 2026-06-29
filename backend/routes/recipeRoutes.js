@@ -11,7 +11,8 @@ const {
   getRecipes,
   getRecipesByLetter,
   updateRecipe,
-  deleteRecipe
+  deleteRecipe,
+  getSharedRecipe
 } = require("../controllers/recipeController");
 
 router.post(
@@ -42,6 +43,11 @@ router.delete(
   "/:id",
   authMiddleware,
   deleteRecipe
-);  
+); 
+
+router.get(
+  "/shared/:id",
+  getSharedRecipe
+);
 
 module.exports = router;    
