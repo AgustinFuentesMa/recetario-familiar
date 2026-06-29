@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
-const transporter = require("../config/mail");
+const resend = require("../config/mail");
 
 const login = async (req, res) => {
   try {
@@ -110,21 +110,16 @@ const forgotPassword = async (req, res) => {
     console.log("USUARIO ENCONTRADO:", user.rows.length);
 
     if (user.rows.length === 0) {
-      console.log("NO EXISTE EL USUARIO");
       return res.json({
         message: "Si el email existe se enviará un enlace",
       });
     }
-
-    console.log("GENERANDO TOKEN");
 
     const token = crypto.randomBytes(32).toString("hex");
 
     const expireDate = new Date(
       Date.now() + 1000 * 60 * 60
     );
-
-    console.log("ACTUALIZANDO BD");
 
     await pool.query(
       `
@@ -136,41 +131,41 @@ const forgotPassword = async (req, res) => {
       [token, expireDate, email]
     );
 
-    console.log("BD ACTUALIZADA");
+    const resetLink =
+      `https://recetario-familiar-five.vercel.app/reset-password/${token}`;
 
-    const resetLink = `https://recetario-familiar-five.vercel.app/reset-password/${token}`;
+    console.log("ENVIANDO MAIL CON RESEND");
 
-    console.log("LINK:", resetLink);
-
-    console.log("ANTES DE SENDMAIL");
-
-    const info = await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+    const data = await resend.emails.send({
+      from: "Recetario Familiar <familiarrecetario@gmail.com>",
       to: email,
       subject: "Recuperación de contraseña",
       html: `
         <h2>Recetario Familiar</h2>
+
+        <p>Haz clic en el siguiente enlace:</p>
+
         <a href="${resetLink}">
           Restablecer contraseña
         </a>
+
+        <p>El enlace vence en 1 hora.</p>
       `,
     });
 
-    console.log("DESPUÉS DE SENDMAIL");
-    console.log(info);
+    console.log("MAIL ENVIADO");
+    console.log(data);
 
     res.json({
       message: "Correo enviado correctamente",
     });
 
   } catch (error) {
-    console.log("ERROR COMPLETO:");
+    console.log("ERROR:");
     console.log(error);
 
     res.status(500).json({
       message: error.message,
-      code: error.code,
-      stack: error.stack,
     });
   }
 };
