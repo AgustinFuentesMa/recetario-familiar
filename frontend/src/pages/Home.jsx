@@ -339,45 +339,85 @@ function Home() {
       )}
 {selectedRecipe && (
 
-  <div className="modal-overlay">
+<div className="modal-overlay">
 
-    <div className="modal recipe-view">
+<div className="recipe-modal">
 
-      <h2>
-        {selectedRecipe.nombre}
-      </h2>
+<div
+className="recipe-header"
+style={{
+backgroundColor:selectedRecipe.color
+}}
+>
 
-      <h3>🥕 Ingredientes</h3>
+<h2>
+🍽 {selectedRecipe.nombre}
+</h2>
 
-      <p>
-        {selectedRecipe.ingredientes}
-      </p>
+<div className="recipe-icons">
 
-      <h3>👨‍🍳 Preparación</h3>
+<button
+className="icon-button"
+title="Compartir"
+>
+📤
+</button>
 
-      <p>
-        {selectedRecipe.descripcion}
-      </p>
+<button
+className="icon-button"
+title="Favorito"
+>
+🤍
+</button>
 
-      <h3>💡 Tips</h3>
+</div>
 
-      <p>
-        {selectedRecipe.tips}
-      </p>
+</div>
 
-      <button
-        onClick={() =>
-          setSelectedRecipe(null)
-        }
-      >
-        Cerrar
-      </button>
+<div className="recipe-body">
 
-    </div>
+<h3>🥕 Ingredientes</h3>
 
-  </div>
+<p>{selectedRecipe.ingredientes}</p>
+
+<h3>👨‍🍳 Preparación</h3>
+
+<p>{selectedRecipe.descripcion}</p>
+
+<h3>💡 Tips</h3>
+
+<p>{selectedRecipe.tips}</p>
+
+</div>
+
+<div className="recipe-footer">
+
+<button
+onClick={()=>{
+setSelectedRecipe(null);
+handleEditRecipe(selectedRecipe);
+}}
+>
+✏️ Editar
+</button>
+
+<button
+onClick={()=>
+setSelectedRecipe(null)
+}
+>
+Cerrar
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 )}
+
+
     </div>
   );
 }
