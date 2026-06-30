@@ -1,3 +1,6 @@
+import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { IoShareSocial } from "react-icons/io5";
+
 function RecipeCard({
   recipe,
   onDelete,
@@ -20,19 +23,41 @@ function RecipeCard({
 
         <div className="recipe-top">
 
-          <h3>{recipe.nombre.toUpperCase()}</h3>
+  <h3>{recipe.nombre.toUpperCase()}</h3>
 
-          <button
-            className="share-button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onShare(recipe);
-            }}
-          >
-            📤
-          </button>
+  <div className="recipe-actions">
 
-        </div>
+    <button
+      className="favorite-button"
+      onClick={(e) => {
+        e.stopPropagation();
+        onFavorite(recipe);
+      }}
+    >
+
+      {recipe.favorita ? (
+        <FaHeart />
+      ) : (
+        <FaRegHeart />
+      )}
+
+    </button>
+
+    <button
+      className="share-button"
+      onClick={(e) => {
+        e.stopPropagation();
+        onShare(recipe);
+      }}
+    >
+
+      <IoShareSocial />
+
+    </button>
+
+  </div>
+
+</div>
 
         <p>{recipe.ingredientes}</p>
 

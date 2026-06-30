@@ -13,7 +13,8 @@ const {
   updateRecipe,
   deleteRecipe,
   getSharedRecipe,
-  saveSharedRecipe
+  saveSharedRecipe,
+  toggleFavorite
 } = require("../controllers/recipeController");
 
 router.post(
@@ -55,6 +56,12 @@ router.post(
   "/shared/:id/save",
   authMiddleware,
   saveSharedRecipe
+);
+
+router.patch(
+  "/favorite/:id",
+  authMiddleware,
+  toggleFavorite
 );
 
 module.exports = router;    

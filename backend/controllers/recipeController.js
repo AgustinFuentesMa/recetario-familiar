@@ -304,6 +304,35 @@ const saveSharedRecipe = async (req, res) => {
 
 };
 
+const toggleFavorite = async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const receta = await pool.query(
+      `
+      UPDATE recetas
+      SET favorita = NOT favorita
+      WHERE id = $1
+      AND usuario_id = $2
+      RETURNING *
+      `,
+      [id, req.user.id]
+    );
+
+    res.json(receta.rows[0]);
+
+  } catch (error) {
+
+    console.log(error);
+
+    res.status(500).json(error);
+
+  }
+
+};
+
 module.exports = {
   createRecipe,
   getRecipes,
@@ -311,5 +340,6 @@ module.exports = {
   updateRecipe,
   deleteRecipe,
   getSharedRecipe,
-  saveSharedRecipe
+  saveSharedRecipe,
+  toggleFavorite
 };

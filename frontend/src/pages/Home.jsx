@@ -196,6 +196,24 @@ function Home() {
   alert("✅ Enlace copiado");
 };
 
+const handleFavorite = async (recipe) => {
+
+  try {
+
+    await api.patch(
+      `/recipes/favorite/${recipe.id}`
+    );
+
+    loadRecipes();
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+
+};
+
   return (
     <div className="home">
 
@@ -261,6 +279,7 @@ function Home() {
   onEdit={handleEditRecipe}
   onView={handleViewRecipe}
   onShare={handleShareRecipe}
+  onFavorite={handleFavorite}
 />
             )
           )}

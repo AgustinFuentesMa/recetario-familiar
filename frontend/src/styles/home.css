@@ -478,6 +478,60 @@ transform:scale(1);
 
 }
 
+.recipe-actions{
+
+  display:flex;
+
+  gap:8px;
+
+  align-items:center;
+
+}
+
+.favorite-button,
+.share-button{
+
+  width:38px;
+
+  height:38px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:white;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  cursor:pointer;
+
+  font-size:18px;
+
+  box-shadow:0 3px 8px rgba(0,0,0,.15);
+
+  transition:.25s;
+}
+
+.favorite-button{
+
+  color:#e63946;
+}
+
+.favorite-button:hover,
+.share-button:hover{
+
+  transform:scale(1.12);
+}
+
+.share-button{
+
+  color:#444;
+}
+
 /* ================================= */
 /* CELULARES */
 /* ================================= */
@@ -679,6 +733,16 @@ transform:scale(1);
   margin:0;
 
   font-size:22px;
+}
+
+.favorite-button,
+.share-button{
+
+  width:32px;
+
+  height:32px;
+
+  font-size:15px;
 }
 
 }
