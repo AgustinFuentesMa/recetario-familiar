@@ -170,6 +170,32 @@ function Home() {
   setSelectedRecipe(recipe);
   };
 
+  const handleShareRecipe = async (recipe) => {
+
+  const url =
+    `${window.location.origin}/shared/${recipe.id}`;
+
+  if (navigator.share) {
+
+    try {
+
+      await navigator.share({
+        title: recipe.nombre,
+        text: "Mirá esta receta",
+        url,
+      });
+
+      return;
+
+    } catch (err) {}
+
+  }
+
+  await navigator.clipboard.writeText(url);
+
+  alert("✅ Enlace copiado");
+};
+
   return (
     <div className="home">
 
@@ -229,18 +255,13 @@ function Home() {
           {filteredRecipes.map(
             (recipe) => (
               <RecipeCard
-                key={recipe.id}
-                recipe={recipe}
-                onDelete={
-                  handleDeleteRecipe
-                }
-                onEdit={
-                  handleEditRecipe
-                }
-                onView={
-                  handleViewRecipe
-                }
-              />
+  key={recipe.id}
+  recipe={recipe}
+  onDelete={handleDeleteRecipe}
+  onEdit={handleEditRecipe}
+  onView={handleViewRecipe}
+  onShare={handleShareRecipe}
+/>
             )
           )}
 
@@ -357,20 +378,11 @@ backgroundColor:selectedRecipe.color
 <div className="recipe-icons">
 
 <button
-className="icon-button"
-title="Compartir"
-onClick={() => {
-
-const link =
-`${window.location.origin}/shared/${selectedRecipe.id}`;
-
-navigator.clipboard.writeText(link);
-
-alert("✅ Enlace copiado");
-
-}}
+  className="icon-button"
+  title="Compartir"
+  onClick={() => handleShareRecipe(selectedRecipe)}
 >
-📤
+  📤
 </button>
 
 <button

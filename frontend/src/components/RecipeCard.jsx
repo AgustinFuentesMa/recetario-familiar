@@ -2,7 +2,8 @@ function RecipeCard({
   recipe,
   onDelete,
   onEdit,
-  onView
+  onView,
+  onShare
 }) {
 
   return (
@@ -17,7 +18,21 @@ function RecipeCard({
 
       <div>
 
-        <h3>{recipe.nombre.toUpperCase()}</h3>
+        <div className="recipe-top">
+
+          <h3>{recipe.nombre.toUpperCase()}</h3>
+
+          <button
+            className="share-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              onShare(recipe);
+            }}
+          >
+            📤
+          </button>
+
+        </div>
 
         <p>{recipe.ingredientes}</p>
 
