@@ -53,7 +53,7 @@ function SharedRecipe() {
         >
 
           <h1>
-            🍲 {recipe.receta_nombre}
+            🍲 {recipe.receta_nombre.toUpperCase()}
           </h1>
 
           <p>

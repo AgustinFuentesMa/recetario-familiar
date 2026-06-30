@@ -180,7 +180,7 @@ function Home() {
     try {
 
       await navigator.share({
-        title: recipe.nombre,
+        title: recipe.nombre.toUpperCase(),
         text: "Mirá esta receta",
         url,
       });
