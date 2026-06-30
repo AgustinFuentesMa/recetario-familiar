@@ -433,6 +433,47 @@ color:white;
   background:#f5f5f5;
 }
 
+.filter-buttons{
+
+  display:flex;
+
+  gap:12px;
+
+  margin-bottom:20px;
+
+}
+
+.filter-buttons button{
+
+  border:none;
+
+  padding:10px 18px;
+
+  border-radius:25px;
+
+  background:#ececec;
+
+  cursor:pointer;
+
+  font-weight:bold;
+
+  transition:.2s;
+}
+
+.filter-buttons button:hover{
+
+  transform:scale(1.05);
+
+}
+
+.active-filter{
+
+  background:#4caf50 !important;
+
+  color:white;
+
+}
+
 @keyframes fadeIn{
 
 from{
@@ -597,7 +638,6 @@ transform:scale(1);
   .recipe-card {
     width: fit-content;
     max-width: 400px;
-    height: auto;
   }
 
   /* Botón compartir pequeño */
@@ -744,6 +784,7 @@ transform:scale(1);
 .recipe-actions
 {
   align-items: normal;
+  gap: 8px;
 }
 
 }

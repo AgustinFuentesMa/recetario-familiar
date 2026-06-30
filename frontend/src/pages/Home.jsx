@@ -21,6 +21,7 @@ function Home() {
   const [ingredientes, setIngredientes] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [tips, setTips] = useState("");
+  const [showFavorites, setShowFavorites] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -157,14 +158,19 @@ function Home() {
     setShowModal(true);
   };
 
-  const filteredRecipes = recipes.filter(
-    (recipe) =>
-      recipe.nombre
-        .toLowerCase()
-        .includes(
-          search.toLowerCase()
-        )
-  );
+  const filteredRecipes = recipes.filter((recipe) => {
+
+  const matchesSearch =
+    recipe.nombre
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+  const matchesFavorite =
+    !showFavorites || recipe.favorita;
+
+  return matchesSearch && matchesFavorite;
+
+});
 
   const handleViewRecipe = (recipe) => {
   setSelectedRecipe(recipe);
@@ -246,6 +252,24 @@ const handleFavorite = async (recipe) => {
           </button>
 
         </div>
+
+        <div className="filter-buttons">
+
+  <button
+    className={!showFavorites ? "active-filter" : ""}
+    onClick={() => setShowFavorites(false)}
+  >
+    📖 Todas
+  </button>
+
+  <button
+    className={showFavorites ? "active-filter" : ""}
+    onClick={() => setShowFavorites(true)}
+  >
+    ❤️ Favoritas
+  </button>
+
+</div>
 
         <input
           type="text"
