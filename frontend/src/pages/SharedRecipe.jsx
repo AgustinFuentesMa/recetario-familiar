@@ -111,11 +111,30 @@ function SharedRecipe() {
 
           </div>
 
-          <button className="save-button">
+          <button
+  className="save-button"
+  onClick={async () => {
 
-            ➕ Guardar en mi recetario
+    try {
 
-          </button>
+      await api.post(
+        `/recipes/shared/${id}/save`
+      );
+
+      alert("✅ Receta agregada a tu recetario");
+
+    } catch(error){
+
+      console.log(error);
+
+    }
+
+  }}
+>
+
+  ➕ Guardar en mi recetario
+
+</button>
 
         </div>
 

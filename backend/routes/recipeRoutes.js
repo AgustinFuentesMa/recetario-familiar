@@ -12,7 +12,8 @@ const {
   getRecipesByLetter,
   updateRecipe,
   deleteRecipe,
-  getSharedRecipe
+  getSharedRecipe,
+  saveSharedRecipe
 } = require("../controllers/recipeController");
 
 router.post(
@@ -48,6 +49,12 @@ router.delete(
 router.get(
   "/shared/:id",
   getSharedRecipe
+);
+
+router.post(
+  "/shared/:id/save",
+  authMiddleware,
+  saveSharedRecipe
 );
 
 module.exports = router;    

@@ -242,11 +242,74 @@ const getSharedRecipe = async (req, res) => {
   }
 };
 
+const saveSharedRecipe = async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const recipe = await pool.query(
+      `
+      SELECT *
+      FROM recetas
+      WHERE id = $1
+      `,
+      [id]
+    );
+
+    if(recipe.rows.length===0){
+      return res.status(404).json({
+        message:"Receta no encontrada"
+      });
+    }
+
+    const r = recipe.rows[0];
+
+    await pool.query(
+      `
+      INSERT INTO recetas
+      (
+        nombre,
+        ingredientes,
+        descripcion,
+        tips,
+        letra,
+        color,
+        usuario_id
+      )
+      VALUES($1,$2,$3,$4,$5,$6,$7)
+      `,
+      [
+        r.nombre,
+        r.ingredientes,
+        r.descripcion,
+        r.tips,
+        r.letra,
+        r.color,
+        req.user.id
+      ]
+    );
+
+    res.json({
+      message:"Receta agregada correctamente"
+    });
+
+  } catch(error){
+
+    console.log(error);
+
+    res.status(500).json(error);
+
+  }
+
+};
+
 module.exports = {
   createRecipe,
   getRecipes,
   getRecipesByLetter,
   updateRecipe,
   deleteRecipe,
-  getSharedRecipe
+  getSharedRecipe,
+  saveSharedRecipe
 };
