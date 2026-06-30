@@ -31,6 +31,22 @@ function SharedRecipe() {
 
 }, []);
 
+const loadRecipe = async () => {
+  try {
+
+    const response = await api.get(
+      `/recipes/shared/${id}`
+    );
+
+    setRecipe(response.data);
+
+  } catch (error) {
+
+    console.log(error);
+
+  }
+};
+
   if (!recipe) {
     return <h2>Cargando receta...</h2>;
   }
