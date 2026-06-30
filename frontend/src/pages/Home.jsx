@@ -229,6 +229,8 @@ const handleCloseProfile = () => {
   setShowProfile(false);
 };
 
+
+
   return (
     <div className="home">
 
@@ -486,11 +488,6 @@ Cerrar
 
 )}
 
-
-    </div>
-  );
-}
-
 {showProfile && (
 
 <div className="modal-overlay">
@@ -562,5 +559,10 @@ Cerrar
 </div>
 
 )}
+
+
+    </div>
+  );
+}
 
 export default Home;
