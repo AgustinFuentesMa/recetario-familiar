@@ -36,6 +36,13 @@ function SharedRecipe() {
 
     <div className="shared-page">
 
+      <button
+  className="back-button"
+  onClick={() => window.history.back()}
+>
+  ← Volver
+</button>     
+
       <div className="shared-card">
 
         <div

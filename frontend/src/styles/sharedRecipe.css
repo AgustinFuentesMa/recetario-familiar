@@ -11,6 +11,8 @@
     align-items:center;
 
     padding:40px;
+
+    position:relative;
 }
 
 .shared-card{
@@ -113,28 +115,66 @@
 
     border:none;
 
-    padding:22px;
+    padding:20px;
 
-    border-radius:15px;
+    border-radius:14px;
 
-    background:#4CAF50;
+    background:linear-gradient(
+        135deg,
+        #43A047,
+        #66BB6A
+    );
 
     color:white;
 
-    font-size:28px;
+    font-size:24px;
 
     font-weight:bold;
 
     cursor:pointer;
 
     transition:.25s;
+
+    box-shadow:
+        0 8px 20px rgba(76,175,80,.35);
 }
 
 .save-button:hover{
 
-    transform:scale(1.02);
+    transform:translateY(-3px);
 
-    background:#43A047;
+    box-shadow:
+        0 12px 25px rgba(76,175,80,.45);
+}
+
+.back-button{
+
+    position:absolute;
+
+    top:25px;
+
+    left:25px;
+
+    border:none;
+
+    background:white;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+    transition:.2s;
+}
+
+.back-button:hover{
+
+    transform:translateY(-2px);
 }
 
 @media(max-width:768px){
@@ -173,4 +213,22 @@
 
     font-size:22px;
 }
+}
+
+@keyframes aparecer {
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(30px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
 }
