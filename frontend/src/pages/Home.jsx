@@ -22,6 +22,7 @@ function Home() {
   const [descripcion, setDescripcion] = useState("");
   const [tips, setTips] = useState("");
   const [showFavorites, setShowFavorites] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -244,12 +245,23 @@ const handleFavorite = async (recipe) => {
 
           </div>
 
-          <button
-            className="logout-button"
-            onClick={handleLogout}
-          >
-            Cerrar sesión
-          </button>
+          <div className="header-buttons">
+
+  <button
+    className="profile-button"
+    onClick={() => setShowProfile(true)}
+  >
+    👤 Mi Perfil
+  </button>
+
+  <button
+    className="logout-button"
+    onClick={handleLogout}
+  >
+    Cerrar sesión
+  </button>
+
+</div>
 
         </div>
 
@@ -428,13 +440,6 @@ backgroundColor:selectedRecipe.color
   📤
 </button>
 
-<button
-className="icon-button"
-title="Favorito"
->
-🤍
-</button>
-
 </div>
 
 </div>
@@ -477,5 +482,77 @@ Cerrar
     </div>
   );
 }
+
+{showProfile && (
+
+<div className="modal-overlay">
+
+  <div className="profile-modal">
+
+    <h2>👤 Mi Perfil</h2>
+
+    <div className="profile-info">
+
+      <p>
+
+        <strong>Nombre:</strong>
+
+        {usuario?.nombre}
+
+      </p>
+
+      <p>
+
+        <strong>Apellido:</strong>
+
+        {usuario?.apellido}
+
+      </p>
+
+      <p>
+
+        <strong>Email:</strong>
+
+        {usuario?.email}
+
+      </p>
+
+      <hr />
+
+      <p>
+
+        <strong>📖 Recetas:</strong>
+
+        {recipes.length}
+
+      </p>
+
+      <p>
+
+        <strong>❤️ Favoritas:</strong>
+
+        {
+          recipes.filter(
+            r => r.favorita
+          ).length
+        }
+
+      </p>
+
+    </div>
+
+    <button
+      onClick={() =>
+        setShowProfile(false)
+      }
+    >
+      Cerrar
+    </button>
+
+  </div>
+
+</div>
+
+)}
 
 export default Home;
