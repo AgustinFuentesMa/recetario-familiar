@@ -142,17 +142,28 @@ const loadRecipe = async () => {
 
       alert("✅ Receta agregada a tu recetario");
 
-    } catch(error){
+      navigate("/home");
+
+    } catch (error) {
 
       console.log(error);
+
+      if (error.response?.status === 401) {
+
+        localStorage.setItem(
+          "redirectAfterLogin",
+          `/shared/${id}`
+        );
+
+        navigate("/");
+
+      }
 
     }
 
   }}
 >
-
   ➕ Guardar en mi recetario
-
 </button>
 
         </div>
