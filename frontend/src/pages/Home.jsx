@@ -221,6 +221,14 @@ const handleFavorite = async (recipe) => {
 
 };
 
+const handleOpenProfile = () => {
+  setShowProfile(true);
+};
+
+const handleCloseProfile = () => {
+  setShowProfile(false);
+};
+
   return (
     <div className="home">
 
