@@ -23,22 +23,42 @@ function Register() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      await api.post(
-        "/auth/register",
-        formData
+  try {
+
+    await api.post(
+      "/auth/register",
+      formData
+    );
+
+    alert("Usuario registrado correctamente");
+
+    const redirect =
+      localStorage.getItem("redirectAfterLogin");
+
+    if (redirect) {
+
+      localStorage.removeItem(
+        "redirectAfterLogin"
       );
 
-      alert("Usuario registrado correctamente");
+      navigate("/");
+
+    } else {
 
       navigate("/");
-    } catch (error) {
-      console.log(error);
-      alert("Error al registrar usuario");
+
     }
-  };
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Error al registrar usuario");
+
+  }
+};
 
   return (
     <div className="auth-page">

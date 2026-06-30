@@ -34,12 +34,27 @@ function Login() {
         response.data.token
       );
 
-      localStorage.setItem(
-        "usuario",
-        JSON.stringify(response.data.usuario)
-      );
+     localStorage.setItem(
+  "usuario",
+  JSON.stringify(response.data.usuario)
+);
 
-      navigate("/home");
+const redirect =
+  localStorage.getItem("redirectAfterLogin");
+
+if (redirect) {
+
+  localStorage.removeItem(
+    "redirectAfterLogin"
+  );
+
+  navigate(redirect);
+
+} else {
+
+  navigate("/home");
+
+}
     } catch (error) {
       alert("Email o contraseña incorrectos");
       console.log(error);

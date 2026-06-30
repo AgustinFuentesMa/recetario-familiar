@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 
@@ -7,26 +8,28 @@ import "../styles/sharedRecipe.css";
 function SharedRecipe() {
 
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    loadRecipe();
-  }, []);
 
-  const loadRecipe = async () => {
-    try {
+  const token = localStorage.getItem("token");
 
-      const response = await api.get(
-        `/recipes/shared/${id}`
-      );
+  if (!token) {
 
-      setRecipe(response.data);
+    localStorage.setItem(
+      "redirectAfterLogin",
+      `/shared/${id}`
+    );
 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    navigate("/");
+
+    return;
+  }
+
+  loadRecipe();
+
+}, []);
 
   if (!recipe) {
     return <h2>Cargando receta...</h2>;
