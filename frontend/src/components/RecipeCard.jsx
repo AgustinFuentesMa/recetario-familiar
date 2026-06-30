@@ -6,7 +6,8 @@ function RecipeCard({
   onDelete,
   onEdit,
   onView,
-  onShare
+  onShare,
+  onFavorite
 }) {
 
   return (

@@ -482,8 +482,6 @@ transform:scale(1);
 
   display:flex;
 
-  gap:8px;
-
   align-items:center;
 
 }
@@ -597,10 +595,8 @@ transform:scale(1);
   }
 
   .recipe-card {
-    width: 100%;
+    width: fit-content;
     max-width: 400px;
-
-    min-height: 220px;
     height: auto;
   }
 
@@ -723,7 +719,7 @@ transform:scale(1);
 
   align-items:flex-start;
 
-  gap:12px;
+  gap:20px;
 }
 
 .recipe-top h3{
@@ -743,6 +739,11 @@ transform:scale(1);
   height:32px;
 
   font-size:15px;
+} 
+
+.recipe-actions
+{
+  align-items: normal;
 }
 
 }
