@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 
+import "../styles/sharedRecipe.css";
+
 function SharedRecipe() {
+
   const { id } = useParams();
 
   const [recipe, setRecipe] = useState(null);
@@ -13,8 +16,13 @@ function SharedRecipe() {
 
   const loadRecipe = async () => {
     try {
-      const response = await api.get(`/recipes/shared/${id}`);
+
+      const response = await api.get(
+        `/recipes/shared/${id}`
+      );
+
       setRecipe(response.data);
+
     } catch (error) {
       console.log(error);
     }
@@ -25,44 +33,91 @@ function SharedRecipe() {
   }
 
   return (
-    <div
-      style={{
-        maxWidth: "700px",
-        margin: "40px auto",
-        padding: "30px",
-        background: recipe.color,
-        borderRadius: "15px",
-      }}
-    >
-      <h1>{recipe.nombre}</h1>
 
-      <h3>🥣 Ingredientes</h3>
-      <p>{recipe.ingredientes}</p>
+    <div className="shared-page">
 
-      <h3>👨‍🍳 Preparación</h3>
-      <p>{recipe.descripcion}</p>
+      <div className="shared-card">
 
-      <h3>💡 Tips</h3>
-      <p>{recipe.tips}</p>
+        <div
+          className="shared-header"
+          style={{
+            background: recipe.color
+          }}
+        >
 
-      <hr />
+          <h1>
+            🍲 {recipe.receta_nombre}
+          </h1>
 
-      <p>
-        <strong>Receta creada por:</strong>{" "}
-        {recipe.nombre_usuario} {recipe.apellido_usuario}
-      </p>
+          <p>
+            Creada por
+            <strong>
+              {" "}
+              {recipe.autor_nombre}{" "}
+              {recipe.autor_apellido}
+            </strong>
+          </p>
 
-      <button
-        style={{
-          marginTop: "20px",
-          padding: "12px 20px",
-          cursor: "pointer",
-        }}
-      >
-        Guardar en mi recetario
-      </button>
+        </div>
+
+        <div className="shared-body">
+
+          <div className="section-card ingredientes">
+
+            <h2>🥣 Ingredientes</h2>
+
+            <p>
+              {recipe.ingredientes}
+            </p>
+
+          </div>
+
+          <div className="section-card preparacion">
+
+            <h2>👨🏻‍🍳 Preparación</h2>
+
+            <p>
+              {recipe.descripcion}
+            </p>
+
+          </div>
+
+          <div className="section-card tips">
+
+            <h2>💡 Tips</h2>
+
+            <p>
+              {recipe.tips}
+            </p>
+
+          </div>
+
+          <div className="autor-box">
+
+            👤 Receta creada por
+
+            <strong>
+
+              {` ${recipe.autor_nombre} ${recipe.autor_apellido}`}
+
+            </strong>
+
+          </div>
+
+          <button className="save-button">
+
+            ➕ Guardar en mi recetario
+
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
+
   );
+
 }
 
 export default SharedRecipe;
